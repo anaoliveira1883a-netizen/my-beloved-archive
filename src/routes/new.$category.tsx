@@ -27,7 +27,7 @@ function NewItem() {
   const [notes, setNotes] = useState("");
   const [reason, setReason] = useState("");
   const [tags, setTags] = useState("");
-  const [status, setStatus] = useState(meta.statuses?.[0] ?? "");
+  const [status, setStatus] = useState<string>(meta.statuses?.[0] ?? "");
   const [rating, setRating] = useState(0);
   const [date, setDate] = useState("");
   const [place, setPlace] = useState("");

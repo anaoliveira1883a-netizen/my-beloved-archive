@@ -19,18 +19,18 @@ export type Item = {
   id: string;
   category: Category;
   title: string;
-  subtitle?: string;
-  notes?: string;
-  reason?: string;
-  status?: string;
-  rating?: number;
+  subtitle?: string | undefined;
+  notes?: string | undefined;
+  reason?: string | undefined;
+  status?: string | undefined;
+  rating?: number | undefined;
   tags: string[];
   favorite: boolean;
   createdAt: string;
-  date?: string;
-  place?: string;
-  link?: string;
-  image?: string;
+  date?: string | undefined;
+  place?: string | undefined;
+  link?: string | undefined;
+  image?: string | undefined;
 };
 
 export type CategoryMeta = {
@@ -175,8 +175,8 @@ export const CATEGORIES: CategoryMeta[] = [
   },
 ];
 
-export const catMeta = (key: string) =>
-  CATEGORIES.find((c) => c.key === key) ?? CATEGORIES[CATEGORIES.length - 1];
+export const catMeta = (key: string): CategoryMeta =>
+  (CATEGORIES.find((c) => c.key === key) ?? CATEGORIES[CATEGORIES.length - 1])!;
 
 export const THEMES = [
   { key: "cassette", label: "Cassete Vintage" },
