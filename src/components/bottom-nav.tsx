@@ -10,7 +10,7 @@ const tabs = [
 export function BottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-md border-t border-border bg-paper/95 backdrop-blur">
+    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-md border-t border-border bg-paper/95 backdrop-blur md:hidden">
       <div className="relative grid grid-cols-5 items-end px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
         {tabs.slice(0, 2).map((t) => (
           <Tab key={t.to} {...t} active={pathname === t.to} />
