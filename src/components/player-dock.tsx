@@ -19,7 +19,7 @@ export function PlayerDock() {
           <button
             onClick={() => (minimized ? setMinimized(false) : toggle())}
             aria-label={minimized ? "Abrir player" : playing ? "Pausar" : "Tocar"}
-            className={`grid size-12 shrink-0 place-items-center rounded-full border border-border bg-secondary text-xs ${
+            className={`grid size-12 shrink-0 place-items-center rounded-full border border-border bg-secondary ${
               playing ? "disc-spin" : ""
             }`}
           >
@@ -35,53 +35,23 @@ export function PlayerDock() {
           ) : null}
         </div>
 
-        {!minimized ? (
-          <>
-            {ytId ? (
-              <div className="mt-3 overflow-hidden rounded-md border border-border">
-                <iframe
-                  ref={frameRef}
-                  title={track.title}
-                  className="aspect-video w-full"
-                  src={`https://www.youtube.com/embed/${ytId}?enablejsapi=1&autoplay=1&playsinline=1&rel=0`}
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                />
-              </div>
-            ) : null}
-            <div className="mt-3 flex items-center gap-2">
-              <button
-                onClick={toggle}
-                className="press flex-1 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground"
-              >
-                {playing ? "pausar" : "tocar"}
-              </button>
-              <button
-                onClick={() => setMinimized(true)}
-                className="press rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground"
-              >
-                minimizar
-              </button>
-              <button
-                onClick={stop}
-                aria-label="Fechar player"
-                className="press rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground"
-              >
-                ✕
-              </button>
-            </div>
-          </>
-        ) : null}
-
-        {/* keeps youtube mounted while minimized */}
-        {ytId && minimized ? (
-          <iframe
-            ref={frameRef}
-            title={track.title}
-            className="h-0 w-0 border-0"
-            src={`https://www.youtube.com/embed/${ytId}?enablejsapi=1&autoplay=1&playsinline=1&rel=0`}
-            allow="autoplay; encrypted-media"
-          />
+        {ytId ? (
+          <div
+            className={
+              minimized
+                ? "h-0 w-0 overflow-hidden"
+                : "mt-3 overflow-hidden rounded-md border border-border"
+            }
+          >
+            <iframe
+              ref={frameRef}
+              title={track.title}
+              className="aspect-video w-full"
+              src={`https://www.youtube.com/embed/${ytId}?enablejsapi=1&autoplay=1&playsinline=1&rel=0`}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
         ) : null}
 
         {track.kind === "audio" ? (
@@ -93,6 +63,30 @@ export function PlayerDock() {
             onEnded={() => setPlaying(false)}
             className="hidden"
           />
+        ) : null}
+
+        {!minimized ? (
+          <div className="mt-3 flex items-center gap-2">
+            <button
+              onClick={toggle}
+              className="press flex-1 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground"
+            >
+              {playing ? "pausar" : "tocar"}
+            </button>
+            <button
+              onClick={() => setMinimized(true)}
+              className="press rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground"
+            >
+              min
+            </button>
+            <button
+              onClick={stop}
+              aria-label="Fechar player"
+              className="press rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground"
+            >
+              ✕
+            </button>
+          </div>
         ) : null}
       </div>
     </div>

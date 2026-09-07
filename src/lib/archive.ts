@@ -47,7 +47,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "music",
     label: "Música",
-    emoji: "🎵",
+    emoji: "♪(´▽`)",
     plural: "músicas",
     empty: "Nenhuma faixa gravada nesta fita ainda ♡",
     fields: [{ key: "subtitle", label: "Artista / álbum" }],
@@ -55,7 +55,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "playlist",
     label: "Playlist",
-    emoji: "📼",
+    emoji: "♬(ᵔᴗᵔ)",
     plural: "playlists",
     empty: "Nenhuma fita montada ainda ♡",
     fields: [{ key: "subtitle", label: "Descrição" }],
@@ -63,7 +63,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "brand",
     label: "Marca",
-    emoji: "🏷️",
+    emoji: "(・ω・)b",
     plural: "marcas",
     empty: "Nenhuma etiqueta colada aqui ainda ♡",
     fields: [{ key: "subtitle", label: "Categoria (tênis, tech...)" }],
@@ -71,7 +71,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "clothes",
     label: "Roupa",
-    emoji: "👕",
+    emoji: "(˘⌣˘)",
     plural: "peças",
     empty: "O guarda-roupa ainda está vazio ♡",
     statuses: ["já tem", "gostaria de ter", "look"],
@@ -80,7 +80,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "gift",
     label: "Presente",
-    emoji: "🎁",
+    emoji: "(๑˃ᴗ˂)",
     plural: "presentes",
     empty: "Nenhuma ideia guardada ainda ♡",
     statuses: ["ideia", "pesquisando", "quero comprar", "comprado", "entregue"],
@@ -89,7 +89,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "food",
     label: "Comida",
-    emoji: "🍜",
+    emoji: "(っ˘ڡ˘ς)",
     plural: "sabores",
     empty: "Nada no cardápio ainda ♡",
     statuses: ["ama", "gosta", "talvez", "não gosta", "quer provar"],
@@ -98,7 +98,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "film",
     label: "Filme/Série",
-    emoji: "🎬",
+    emoji: "(⌐■_■)",
     plural: "títulos",
     empty: "A fita ainda não foi rebobinada ♡",
     statuses: ["quero assistir", "assistindo", "terminado", "assistimos juntos"],
@@ -107,7 +107,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "anime",
     label: "Anime/Mangá",
-    emoji: "🌙",
+    emoji: "(◕‿◕)",
     plural: "obras",
     empty: "Nenhum volume nesta prateleira ainda ♡",
     statuses: ["quero assistir", "assistindo", "terminado", "favorito"],
@@ -116,7 +116,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "game",
     label: "Jogo",
-    emoji: "🕹️",
+    emoji: "(•̀ᴗ•́)و",
     plural: "jogos",
     empty: "Insira uma ficha para começar ♡",
     statuses: ["quer jogar", "jogando", "zerado", "jogamos juntos"],
@@ -125,7 +125,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "book",
     label: "Livro",
-    emoji: "📖",
+    emoji: "(๑>ᴗ<๑)",
     plural: "livros",
     empty: "A estante ainda está vazia ♡",
     statuses: ["quer ler", "lendo", "lido", "favorito"],
@@ -134,7 +134,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "place",
     label: "Lugar",
-    emoji: "📍",
+    emoji: "(＾▽＾)ノ",
     plural: "lugares",
     empty: "Nenhum destino marcado no mapa ainda ♡",
     statuses: ["ele gosta", "já fomos", "quer conhecer", "quero levá-lo"],
@@ -143,7 +143,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "said",
     label: "Coisa que ele disse",
-    emoji: "💬",
+    emoji: "(・_・)ノ",
     plural: "comentários",
     empty: "Talvez ele mencione algo que você queira guardar aqui ♡",
     fields: [{ key: "subtitle", label: "Contexto (onde, quando)" }],
@@ -151,7 +151,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "memory",
     label: "Memória",
-    emoji: "📸",
+    emoji: "(￣ω￣)",
     plural: "memórias",
     empty: "Esta gaveta de fotos ainda está vazia ♡",
     fields: [{ key: "subtitle", label: "Pessoas / música do dia" }],
@@ -159,7 +159,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "promise",
     label: "Promessa",
-    emoji: "🫶",
+    emoji: "(｡•́‿•̀｡)",
     plural: "promessas",
     empty: "Nenhum bilhete dentro da caixa ainda ♡",
     statuses: ["promessa nossa", "promessa pessoal", "algum dia", "cumprida"],
@@ -168,7 +168,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "note",
     label: "Nota",
-    emoji: "⭐",
+    emoji: "(＝ᴗ＝)",
     plural: "notas",
     empty: "Nenhuma anotação solta ainda ♡",
     fields: [{ key: "subtitle", label: "Assunto" }],
