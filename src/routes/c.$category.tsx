@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { catMeta } from "@/lib/archive";
 import { useArchive } from "@/lib/archive-context";
-import { EmptyDrawer, ItemCard, SectionTitle } from "@/components/archive-ui";
+import { EmptyDrawer, ItemCard, SectionTitle, Kao } from "@/components/archive-ui";
 
 export const Route = createFileRoute("/c/$category")({
   head: () => ({
@@ -28,12 +28,12 @@ function CategoryPage() {
     .filter((i) => (status ? i.status === status : true));
 
   return (
-    <main className="px-4 pt-6">
+    <main className="px-4 pt-8 sm:px-6">
       <Link to="/" className="label-chip press">
         ← arquivo
       </Link>
       <h1 className="mt-3 flex items-center gap-2 text-2xl font-bold">
-        <span>{meta.emoji}</span> {meta.label}
+<Kao face={meta.emoji} className="text-sm" /> {meta.label}
       </h1>
       <p className="text-xs text-muted-foreground">
         {list.length} {meta.plural}
@@ -63,25 +63,24 @@ function CategoryPage() {
         {list.length === 0 ? (
           <EmptyDrawer text={meta.empty} />
         ) : view === "list" ? (
-          <div className="grid gap-2">
+          <div className="grid gap-2 lg:grid-cols-2">
             {list.map((i, n) => (
               <ItemCard key={i.id} item={i} index={n} />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
             {list.map((i, n) => (
               <Link
                 key={i.id}
                 to="/item/$id"
                 params={{ id: i.id }}
-                className="polaroid anim-in block"
-                style={{ animationDelay: `${n * 30}ms` }}
+                className="folder anim-in block px-3 py-4"
+                style={{ animationDelay: `${n * 25}ms` }}
               >
-                <div className="grid aspect-square place-items-center bg-secondary text-3xl">
-                  {meta.emoji}
-                </div>
-                <p className="mt-2 truncate text-center font-hand text-base">{i.title}</p>
+                <span className="folder-tab-label">{meta.plural}</span>
+                <Kao face={meta.emoji} className="text-[0.65rem]" />
+                <p className="mt-2 truncate text-sm">{i.title}</p>
               </Link>
             ))}
           </div>

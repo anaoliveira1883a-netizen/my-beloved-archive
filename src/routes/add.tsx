@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CATEGORIES } from "@/lib/archive";
+import { Kao } from "@/components/archive-ui";
 
 export const Route = createFileRoute("/add")({
   head: () => ({
@@ -21,21 +22,22 @@ export const Route = createFileRoute("/add")({
 
 function AddMenu() {
   return (
-    <main className="px-4 pt-6">
+    <main className="px-4 pt-8 sm:px-6">
       <p className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground">
         adição rápida
       </p>
       <h1 className="mt-1 text-2xl font-bold">O que você quer guardar?</h1>
-      <div className="mt-5 grid grid-cols-2 gap-2">
+      <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
         {CATEGORIES.map((c, n) => (
           <Link
             key={c.key}
             to="/new/$category"
             params={{ category: c.key }}
-            className="card-object anim-in flex items-center gap-2 p-3"
+            className="folder anim-in flex flex-col gap-1 px-3 py-3"
             style={{ animationDelay: `${n * 20}ms` }}
           >
-            <span className="text-lg">{c.emoji}</span>
+            <span className="folder-tab-label">{c.plural}</span>
+            <Kao face={c.emoji} className="text-[0.65rem]" />
             <span className="text-sm">{c.label}</span>
           </Link>
         ))}

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { CATEGORIES, catMeta } from "@/lib/archive";
 import { useArchive } from "@/lib/archive-context";
-import { EmptyDrawer, ItemCard, SectionTitle, inputClass } from "@/components/archive-ui";
+import { EmptyDrawer, ItemCard, SectionTitle, inputClass, Kao } from "@/components/archive-ui";
 
 export const Route = createFileRoute("/search")({
   head: () => ({
@@ -47,7 +47,7 @@ function SearchPage() {
   })).filter((g) => g.list.length);
 
   return (
-    <main className="px-4 pt-6">
+    <main className="px-4 pt-8 sm:px-6">
       <h1 className="text-2xl font-bold">Buscar no arquivo</h1>
       <input
         className={`${inputClass} mt-3`}
@@ -93,7 +93,7 @@ function SearchPage() {
           grouped.map((g) => (
             <section key={g.meta.key}>
               <SectionTitle>
-                {catMeta(g.meta.key).emoji} {g.meta.label} · {g.list.length}
+<Kao face={catMeta(g.meta.key).emoji} className="text-[0.65rem]" /> {g.meta.label} · {g.list.length}
               </SectionTitle>
               <div className="grid gap-2">
                 {g.list.map((i, n) => (
