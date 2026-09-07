@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { catMeta, type Item } from "@/lib/archive";
 import { useArchive } from "@/lib/archive-context";
+import { usePlayer } from "@/lib/player-context";
+import { playableKind } from "@/lib/player";
 
 export function SectionTitle({
   children,
@@ -24,6 +26,12 @@ export function Chip({ children }: { children: ReactNode }) {
   return <span className="label-chip">{children}</span>;
 }
 
+export function Kao({ face, className = "" }: { face: string; className?: string }) {
+  return (
+    <span className={`whitespace-nowrap font-mono text-muted-foreground ${className}`}>{face}</span>
+  );
+}
+
 export function HeartButton({ item }: { item: Item }) {
   const { toggleFavorite } = useArchive();
   return (
@@ -43,6 +51,28 @@ export function HeartButton({ item }: { item: Item }) {
   );
 }
 
+export function PlayButton({ item, className = "" }: { item: Item; className?: string }) {
+  const { play, track, playing, toggle } = usePlayer();
+  if (!playableKind(item.link)) return null;
+  const current = track?.id === item.id;
+  return (
+    <button
+      aria-label={current && playing ? "Pausar" : "Tocar"}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (current) toggle();
+        else play({ id: item.id, title: item.title, subtitle: item.subtitle, url: item.link! });
+      }}
+      className={`press grid size-8 shrink-0 place-items-center rounded-full border border-border text-[0.65rem] ${
+        current && playing ? "bg-primary text-primary-foreground" : "bg-secondary"
+      } ${className}`}
+    >
+      {current && playing ? "❚❚" : "▶"}
+    </button>
+  );
+}
+
 export function ItemCard({ item, index = 0 }: { item: Item; index?: number }) {
   const meta = catMeta(item.category);
   return (
@@ -53,8 +83,8 @@ export function ItemCard({ item, index = 0 }: { item: Item; index?: number }) {
       style={{ animationDelay: `${Math.min(index, 8) * 30}ms` }}
     >
       <div className="flex items-start gap-3">
-        <div className="grid size-10 shrink-0 place-items-center rounded-[var(--radius-sm)] border border-border bg-secondary text-lg">
-          {meta.emoji}
+        <div className="grid h-10 w-14 shrink-0 place-items-center rounded-[var(--radius-sm)] border border-border bg-secondary">
+          <Kao face={meta.emoji} className="text-[0.6rem]" />
         </div>
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium leading-tight">{item.title}</p>
@@ -71,6 +101,7 @@ export function ItemCard({ item, index = 0 }: { item: Item; index?: number }) {
             ))}
           </div>
         </div>
+        <PlayButton item={item} />
         <HeartButton item={item} />
       </div>
     </Link>
@@ -79,10 +110,11 @@ export function ItemCard({ item, index = 0 }: { item: Item; index?: number }) {
 
 export function EmptyDrawer({ text }: { text: string }) {
   return (
-    <div className="card-object flex flex-col items-center gap-2 px-6 py-10 text-center">
-      <div className="text-3xl opacity-70">🗄️</div>
+    <div className="folder flex flex-col items-center gap-2 px-6 py-10 text-center">
+      <span className="folder-tab-label">vazia</span>
+      <Kao face="(・_・;)" className="text-sm" />
       <p className="font-hand text-xl">{text}</p>
-      <p className="max-w-[16rem] text-xs text-muted-foreground">
+      <p className="max-w-[18rem] text-xs text-muted-foreground">
         Toque em “+” para guardar a primeira coisa nesta gaveta.
       </p>
     </div>
@@ -104,7 +136,7 @@ export function RetroClock() {
     month: "short",
   });
   return (
-    <div className="rounded-[var(--radius-sm)] border border-border bg-secondary px-3 py-1.5 text-right">
+    <div className="rounded-[var(--radius-sm)] border border-border px-3 py-1.5 text-right">
       <p className="font-mono text-xl leading-none tabular-nums">{time}</p>
       <p className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
         {date}

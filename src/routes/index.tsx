@@ -1,18 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CATEGORIES, catMeta } from "@/lib/archive";
 import { useArchive } from "@/lib/archive-context";
-import { ItemCard, RetroClock, SectionTitle, EmptyDrawer } from "@/components/archive-ui";
+import { ItemCard, RetroClock, SectionTitle, EmptyDrawer, Kao } from "@/components/archive-ui";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "♡ My Archive — início" },
+      { title: "My Archive — início" },
       {
         name: "description",
         content:
           "A página inicial do seu arquivo pessoal: contadores, favoritos e as últimas lembranças guardadas.",
       },
-      { property: "og:title", content: "♡ My Archive — início" },
+      { property: "og:title", content: "My Archive — início" },
       {
         property: "og:description",
         content: "Guarde músicas, presentes, promessas e memórias em um só lugar.",
@@ -33,14 +33,14 @@ function Home() {
   const last = items[0];
 
   return (
-    <main className="px-4 pt-6">
+    <main className="px-4 pt-8 sm:px-6">
       <header className="flex items-start justify-between gap-3">
         <div>
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground">
             arquivo pessoal · vol. 01
           </p>
           <h1 className="mt-1 text-3xl font-bold tracking-tight">
-            ♡ {settings.archiveName}
+            {settings.archiveName}
           </h1>
           <p className="font-hand text-lg text-muted-foreground">
             {settings.favoriteQuote}
@@ -49,30 +49,28 @@ function Home() {
         <RetroClock />
       </header>
 
-      <section className="mt-5 flex items-stretch gap-3">
-        <div className="polaroid w-1/2 rotate-[-1.5deg]">
-          <div className="grid aspect-square place-items-center bg-secondary text-4xl">
-            📼
-          </div>
-          <p className="mt-2 text-center font-hand text-base">
-            {last ? last.title : "primeira lembrança"}
+      <section className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="card-object p-4">
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
+            memórias guardadas
+          </p>
+          <p className="mt-1 font-mono text-3xl tabular-nums">
+            {ready ? String(items.length).padStart(2, "0") : "--"}
           </p>
         </div>
-        <div className="flex w-1/2 flex-col justify-between gap-3">
-          <div className="card-object p-3">
-            <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
-              memórias guardadas
-            </p>
-            <p className="font-mono text-3xl tabular-nums">
-              {ready ? String(items.length).padStart(2, "0") : "--"}
-            </p>
-          </div>
-          <div className="card-object p-3">
-            <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
-              último registro
-            </p>
-            <p className="mt-0.5 truncate text-sm">{last ? last.title : "—"}</p>
-          </div>
+        <div className="card-object p-4">
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
+            último registro
+          </p>
+          <p className="mt-1 truncate text-sm">{last ? last.title : "—"}</p>
+        </div>
+        <div className="card-object p-4">
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
+            favoritos
+          </p>
+          <p className="mt-1 font-mono text-3xl tabular-nums">
+            {ready ? String(items.filter((i) => i.favorite).length).padStart(2, "0") : "--"}
+          </p>
         </div>
       </section>
 
@@ -93,16 +91,17 @@ function Home() {
 
       <section className="mt-6">
         <SectionTitle>gavetas</SectionTitle>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
           {CATEGORIES.map((c) => (
             <Link
               key={c.key}
               to="/c/$category"
               params={{ category: c.key }}
-              className="card-object flex flex-col items-center gap-1 px-2 py-3 text-center"
+              className="folder press flex flex-col gap-1 px-3 py-3"
             >
-              <span className="text-xl">{c.emoji}</span>
-              <span className="text-[0.68rem] leading-tight">{c.label}</span>
+              <span className="folder-tab-label">{c.plural}</span>
+              <Kao face={c.emoji} className="text-[0.7rem]" />
+              <span className="text-sm leading-tight">{c.label}</span>
             </Link>
           ))}
         </div>
@@ -118,7 +117,7 @@ function Home() {
         >
           memory box
         </SectionTitle>
-        <Link to="/box" className="card-object block bg-secondary p-4">
+        <Link to="/box" className="card-object block p-4">
           <p className="font-hand text-xl">Surprise me ♡</p>
           <p className="text-xs text-muted-foreground">
             Abra a caixa e tire uma lembrança aleatória.

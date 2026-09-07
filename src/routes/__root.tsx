@@ -13,6 +13,9 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ArchiveProvider } from "../lib/archive-context";
 import { BottomNav } from "../components/bottom-nav";
+import { SideNav } from "../components/side-nav";
+import { PlayerProvider } from "../lib/player-context";
+import { PlayerDock } from "../components/player-dock";
 
 function NotFoundComponent() {
   return (
@@ -128,10 +131,18 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ArchiveProvider>
-        <div className="grain mx-auto min-h-screen max-w-md bg-background pb-28">
-          <Outlet />
-          <BottomNav />
-        </div>
+        <PlayerProvider>
+          <div className="flex min-h-screen bg-background">
+            <SideNav />
+            <div className="min-w-0 flex-1 pb-28 md:pb-12">
+              <div className="mx-auto w-full max-w-3xl lg:max-w-5xl">
+                <Outlet />
+              </div>
+            </div>
+            <BottomNav />
+            <PlayerDock />
+          </div>
+        </PlayerProvider>
       </ArchiveProvider>
     </QueryClientProvider>
   );
